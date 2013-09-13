@@ -6,3 +6,4 @@ Description: A simple logging facility that extends R's message(), warning(), an
 Title: Simple logging in R
 Author: Maarten-Jan Kallen
 Maintainer: Maarten-Jan Kallen <sayhi@maartenjan.org>
+URL: https://github.com/mjkallen/rlogging
