@@ -1,0 +1,8 @@
+Package: rlogging
+Version: 1.0
+Date: 2013-09-12
+License: MIT + file LICENSE
+Description: A simple logging facility that extends R's message(), warning(), and stop() functions.
+Title: Simple logging in R
+Author: Maarten-Jan Kallen
+Maintainer: Maarten-Jan Kallen <sayhi@maartenjan.org>

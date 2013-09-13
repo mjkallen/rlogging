@@ -1,0 +1,7 @@
+export(GetLogFile)
+export(SetLogFile)
+export(GetLogLevel)
+export(SetLogLevel)
+export(message)
+export(warning)
+export(stop)
