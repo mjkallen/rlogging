@@ -27,6 +27,9 @@ Functionality
   * choose one of three logging levels (INFO, WARN, and STOP) to control which
     messages are suppressed
 
+See [this blog post](http://www.maartenjan.org/artikelen/2013-09-20-introducing-the-rlogging-package-for-simple-logging-in-r.html) 
+for instructions on how to use the package.
+
 Installation
 ------------
 
