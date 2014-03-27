@@ -31,7 +31,7 @@ SetLogFile <- function(base.file="rlogging.log", folder=getwd(),
     assign("split.files", split.files, envir=.rloggingOptions)
 
 
-    if (is.null(file)) {
+    if (is.null(base.file)) {
         assign("logfile.base", NULL, envir=.rloggingOptions)
     } else {
         assign("logfile.base", file.path(folder, base.file), envir=.rloggingOptions)
@@ -39,8 +39,6 @@ SetLogFile <- function(base.file="rlogging.log", folder=getwd(),
 }
 
 GetLogFile <- function(level) {
-    # TODO (feju): allow for more flexible file names that can have a log
-    #       extension or not and may contain special chars.
     base.file <- get("logfile.base", envir=.rloggingOptions)
 
     if (!missing(level)) {
