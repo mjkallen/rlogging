@@ -8,8 +8,13 @@ message <- function(..., domain=NULL, appendLF=TRUE) {
     } else {
         # if loglevel is set to INFO, then print log message, else do nothing
         loglevel <- GetLogLevel()
+        split.files <- get("split.files", envir=.rloggingOptions)
         if (loglevel == "INFO") {
-            PrintLogMessage("[INFO] ", ...)
+            if (split.files) {
+                PrintLogMessage(..., level="INFO")
+            } else {
+                PrintLogMessage("[INFO] ", ...)
+            }
         }
     }
     invisible()

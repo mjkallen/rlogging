@@ -1,6 +1,8 @@
 .rloggingOptions <- new.env()
 
 .onLoad <- function(libname, pkgname) {
+    SetTimeStampFormat()
+    SetFilenameSuffixes()
     SetLogFile()
     SetLogLevel()
     lockEnvironment(.rloggingOptions)

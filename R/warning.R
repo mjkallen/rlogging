@@ -5,8 +5,13 @@ warning <- function(..., call.=TRUE, immediate.=FALSE, domain=NULL) {
     if (!is.condition) {
         # if loglevel is set to INFO or WARN, then print log message
         loglevel <- GetLogLevel()
+        split.files <- get("split.files", envir=.rloggingOptions)
         if (loglevel %in% c("INFO", "WARN")) {
-            PrintLogMessage("[WARN] ", ...)
+            if (split.files) {
+                PrintLogMessage(..., level="WARN")
+            } else {
+                PrintLogMessage("[WARN] ", ...)
+            }
         }
         # always collect warnings when printing log messages
         immediate. <- FALSE

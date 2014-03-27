@@ -3,18 +3,50 @@ SetLogLevel <- function(level="INFO") {
     assign("loglevel", level, envir=.rloggingOptions)
 }
 
-GetLogLevel <-function () {
+GetLogLevel <-function() {
     get("loglevel", envir=.rloggingOptions)
 }
 
-SetLogFile <- function(file="rlogging.log", folder=getwd()) {
+SetTimeStampFormat <- function(ts.format="[%Y-%m-%d %H:%M:%S]") {
+  assign("ts.format", ts.format, envir=.rloggingOptions)
+}
+
+GetTimeStampFormat <- function() {
+  get("ts.format", envir=.rloggingOptions)
+}
+
+SetFilenameSuffixes <- function(file.name.suffixes = c("message", "warning",
+                                                       "stop")) {
+    file.name.suffixes <- as.list(file.name.suffixes)
+    names(file.name.suffixes) <- c("INFO", "WARN", "STOP")
+    assign("file.name.suffixes", file.name.suffixes, envir=.rloggingOptions)
+}
+
+GetFilenameSuffixes <- function() {
+    get("file.name.suffixes", envir=.rloggingOptions)
+}
+
+SetLogFile <- function(base.file="rlogging.log", folder=getwd(),
+                       split.files=F) {
+    assign("split.files", split.files, envir=.rloggingOptions)
+
+
     if (is.null(file)) {
-        assign("logfile", NULL, envir=.rloggingOptions)
+        assign("logfile.base", NULL, envir=.rloggingOptions)
     } else {
-        assign("logfile", file.path(folder, file), envir=.rloggingOptions)
+        assign("logfile.base", file.path(folder, base.file), envir=.rloggingOptions)
     }
 }
 
-GetLogFile <- function() {
-    get("logfile", envir=.rloggingOptions)
+GetLogFile <- function(level) {
+    # TODO (feju): allow for more flexible file names that can have a log
+    #       extension or not and may contain special chars.
+    base.file <- get("logfile.base", envir=.rloggingOptions)
+
+    if (!missing(level)) {
+        file.name.suffix <- get(level, GetFilenameSuffixes())
+        paste(base.file, "_", file.name.suffix, ".log", sep = "")
+    } else {
+        paste(base.file, "log", sep = ".")
+    }
 }
