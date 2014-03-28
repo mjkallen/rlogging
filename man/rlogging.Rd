@@ -106,8 +106,10 @@ changed, therefore no log messages will be printed or written to the log file.
     See the functions \link[base]{message}, \link[base]{warning}, and 
     \link[base]{stop} in R's base package for their usage.
 }
-\author{Maarten-Jan Kallen \email{sayhi@maartenjan.org}}
-\author{Felix Jung \email{felix@jung.fm}}
+\author{Maarten-Jan Kallen \email{sayhi@maartenjan.org}
+
+        Felix Jung \email{felix@jung.fm}
+}
 \value{
     \command{GetLogFile} returns a string with the full path to the log
     file, possibly specified through the \code{level} parameter.
