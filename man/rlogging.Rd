@@ -22,7 +22,7 @@ logging.
     SetLogLevel(level="INFO")
     GetLogLevel()
 
-    SetTimeStampFormat(ts.format="[%Y-%m-%d %H:%M:%S]")
+    SetTimeStampFormat(ts.format="[\%Y-\%m-\%d \%H:\%M:\%S]")
     GetTimeStampFormat()
 
     SetFilenameSuffixes(file.name.suffixes=list(INFO="message",
@@ -45,14 +45,14 @@ is the current working directory).}
       \code{base.file} parameter. The prefixes \sQuote{INFO}, \sQuote{WARN},
       and \sQuote{STOP} will be used to differentiate the different logging
       levels in the log. If set to \code{TRUE}, each level will be logged into
-      its own log file using respective suffixes for the log file names. The
+      its own log file using respective suffixes for the log filenames. The
       suffixes are settable through the \command{SetFilenameSuffixes} function.}
     \item{level}{Logging level (default is \sQuote{INFO}, others are
 \sQuote{WARN} and \sQuote{STOP}).}
     \item{ts.format}{A string providing the format used for timestamps in log
       files. See \command{base::strptime} for a documentation of formatting
       options.}
-    \item{file.name.suffixes}{Named \code{list} of file name suffixes to be
+    \item{file.name.suffixes}{Named \code{list} of filename suffixes to be
       used when \code{split.files} is set to \code{TRUE}. The list must contain
     the three elements \sQuote{INFO}, \sQuote{WARN},
       and \sQuote{STOP}.}
@@ -87,7 +87,7 @@ itself. For example, \command{message("Hello world!")} will print
 to the console and append the same message to the log file if this one is not
 set to \code{NULL}. If \code{split.files} is set to \code{TRUE}, the logging
 level is not printed to file, but is still printed to console. The format of
-the timestamp can be changed through the function \comomand{SetTimeStampFormat}.
+the timestamp can be changed through the function \command{SetTimeStampFormat}.
 
 If the log level is set to \sQuote{INFO}, then all three functions will print a
 message. If set to \sQuote{WARN} then only \command{warning()} and
@@ -107,6 +107,7 @@ changed, therefore no log messages will be printed or written to the log file.
     \link[base]{stop} in R's base package for their usage.
 }
 \author{Maarten-Jan Kallen \email{sayhi@maartenjan.org}}
+\author{Felix Jung \email{felix@jung.fm}}
 \value{
     \command{GetLogFile} returns a string with the full path to the log
     file, possibly specified through the \code{level} parameter.
@@ -116,6 +117,6 @@ changed, therefore no log messages will be printed or written to the log file.
     \command{GetTimeStampFormat} returns a \code{string} containing the
     timestamp format.
 
-    \command{GetFilenameSuffixes}{Returns the named \code{list} of file name
+    \command{GetFilenameSuffixes}{Returns the named \code{list} of filename
       suffixes.}
 }
