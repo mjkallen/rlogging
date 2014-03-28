@@ -41,7 +41,7 @@ GetFilenameSuffixes <- function() {
 }
 
 SetLogFile <- function(base.file="rlogging.log", folder=getwd(),
-                       split.files=F) {
+                       split.files=FALSE) {
     assign("split.files", split.files, envir=.rloggingOptions)
 
     if (is.null(base.file)) {

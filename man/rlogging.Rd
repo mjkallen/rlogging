@@ -16,7 +16,7 @@ console and/or to a text file of your choosing, and control the level of
 logging.
 }
 \usage{
-    SetLogFile(base.file="rlogging.log", folder=getwd(), split.files=F)
+    SetLogFile(base.file="rlogging.log", folder=getwd(), split.files=FALSE)
     GetLogFile(level)
 
     SetLogLevel(level="INFO")
