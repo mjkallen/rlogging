@@ -62,7 +62,7 @@ GetLogFile <- function(level) {
             base.file
         } else {
             file.name.suffix <- get(level, GetFilenameSuffixes())
-            replacement <- paste("\\1", file.name.suffix, "\\2")
+            replacement <- paste("\\1", "_", file.name.suffix, "\\2", sep="")
             sub("(.+?)(\\.[^.]*$|$)", replacement, base.file)
         }
     } else {
