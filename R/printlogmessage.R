@@ -1,6 +1,6 @@
 PrintLogMessage <- function(..., domain=NULL, level) {
 
-    timestamp <- GetTimeStampFormat()
+    timestamp <- format(Sys.time(), format=GetTimeStampFormat())
     base::message(timestamp, ..., domain=domain)
     #cat(timestamp, ..., "\n", sep="")
 
