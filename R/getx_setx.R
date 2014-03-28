@@ -29,7 +29,7 @@ SetFilenameSuffixes <- function(file.name.suffixes=list(INFO="message",
         names(file.name.suffixes))
 
     if (length(missing.elements)) {
-        stop("argument file.name.suffixes is missing element(s):",
+        stop("argument file.name.suffixes is missing element(s): ",
           paste(missing.elements, sep="", collapse=", "))
     }
 
