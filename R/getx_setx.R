@@ -15,9 +15,9 @@ GetTimeStampFormat <- function() {
   get("ts.format", envir=.rloggingOptions)
 }
 
-SetFilenameSuffixes <- function(file.name.suffixes = list(INFO="message",
-                                                          WARN="warning",
-                                                          STOP="stop")) {
+SetFilenameSuffixes <- function(file.name.suffixes=list(INFO="message",
+                                                        WARN="warning",
+                                                        STOP="stop")) {
     # Check that a list of length=3 is passed to this function:
     if (!is.list(file.name.suffixes) | length(file.name.suffixes) != 3) {
         stop("argument file.name.suffixes must must be a list of length=3.")
@@ -25,10 +25,8 @@ SetFilenameSuffixes <- function(file.name.suffixes = list(INFO="message",
 
     # Check if the list of suffixes contains INFO, WARN, and STOP. If not,
     # Return a message indicating the missing elements of file.name.suffixes
-    missing.elements <- setdiff(
-        c("INFO", "WARN", "STOP"),
-        names(file.name.suffixes)
-    )
+    missing.elements <- setdiff(c("INFO", "WARN", "STOP"),
+        names(file.name.suffixes))
 
     if (length(missing.elements)) {
         stop("argument file.name.suffixes is missing element(s):",
@@ -46,22 +44,33 @@ SetLogFile <- function(base.file="rlogging.log", folder=getwd(),
                        split.files=F) {
     assign("split.files", split.files, envir=.rloggingOptions)
 
-
     if (is.null(base.file)) {
         assign("logfile.base", NULL, envir=.rloggingOptions)
     } else {
-        assign("logfile.base", file.path(folder, base.file), envir=.rloggingOptions)
+        assign("logfile.base", file.path(folder, base.file),
+          envir=.rloggingOptions)
     }
 }
 
 GetLogFile <- function(level) {
     base.file <- get("logfile.base", envir=.rloggingOptions)
-
+    split.files <- get("split.files", envir=.rloggingOptions)
     if (!missing(level)) {
-        file.name.suffix <- get(level, GetFilenameSuffixes())
-        replacement <- paste("\\1", file.name.suffix, "\\2")
-        sub("(.+?)(\\.[^.]*$|$)", replacement, base.file)
+        if (!split.files) {
+            warning("level=", level, "provided to GetLogFile(), but log files
+              are not split. Ignoring parameter.")
+            base.file
+        } else {
+            file.name.suffix <- get(level, GetFilenameSuffixes())
+            replacement <- paste("\\1", file.name.suffix, "\\2")
+            sub("(.+?)(\\.[^.]*$|$)", replacement, base.file)
+        }
     } else {
-        base.file
+        if (split.files) {
+            stop("log files are split, but no level parameter provided to
+              GetLogFile().")
+        } else {
+          base.file
+        }
     }
 }
