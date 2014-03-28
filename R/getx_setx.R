@@ -15,10 +15,26 @@ GetTimeStampFormat <- function() {
   get("ts.format", envir=.rloggingOptions)
 }
 
-SetFilenameSuffixes <- function(file.name.suffixes = c("message", "warning",
-                                                       "stop")) {
-    file.name.suffixes <- as.list(file.name.suffixes)
-    names(file.name.suffixes) <- c("INFO", "WARN", "STOP")
+SetFilenameSuffixes <- function(file.name.suffixes = list(INFO="message",
+                                                          WARN="warning",
+                                                          STOP="stop")) {
+    # Check that a list of length=3 is passed to this function:
+    if (!is.list(file.name.suffixes) | length(file.name.suffixes) != 3) {
+        stop("argument file.name.suffixes must must be a list of length=3.")
+    }
+
+    # Check if the list of suffixes contains INFO, WARN, and STOP. If not,
+    # Return a message indicating the missing elements of file.name.suffixes
+    missing.elements <- setdiff(
+        c("INFO", "WARN", "STOP"),
+        names(file.name.suffixes)
+    )
+
+    if (length(missing.elements)) {
+        stop("argument file.name.suffixes is missing element(s):",
+          paste(missing.elements, sep="", collapse=", "))
+    }
+
     assign("file.name.suffixes", file.name.suffixes, envir=.rloggingOptions)
 }
 
